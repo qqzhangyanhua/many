@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="format-detection" content="telephone=no,email=no,address=no">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta content="fullscreen=yes,preventMove=no" name="ML-Config">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="force-rendering" content="webkit">
+    <meta name="renderer" content="webkit">
+    <meta name="apple-mobile-web-app-title" content="">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="format-detection" content="email=no">
+    <meta name="viewport"
+        content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,shrink-to-fit=no,viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="renderer" content="webkit">
+    <meta name="HandheldFriendly" content="true">
+    <meta name="MobileOptimized" content="320">
+    <meta name="screen-orientation" content="portrait">
+    <meta name="x5-orientation" content="portrait">
+    <meta name="full-screen" content="yes">
+    <meta name="x5-fullscreen" content="true">
+    <meta name="browsermode" content="application">
+    <meta name="x5-page-mode" content="app">
+    <meta name="msapplication-tap-highlight" content="no">
+    <title>myapp</title>
+    <link href="/vueViews/dist/static/css/app.css?t=8bebe8fb72a3bf49f775" rel="stylesheet">
+</head>
+
+<body>
+    <div id="app"></div>
+    <script src="ebeiapp://cordova.js"></script>
+    <script>
+        //var api_url = "https://ecmapitest.ysservice.com.cn";
+        // var api_url = "https://ys-api.9zdata.cn";
+        // var api_url = "https://ecmapisit.ysservice.com.cn";
+        var api_url = "/api";
+
+
+        // var api_url = "https://ecmapisit.ysservice.com.cn/";
+        //var login_api_url = "https://ecmmalltest.ysservice.com.cn";
+        var login_api_url = "https://ys-api.9zdata.cn";
+        // var login_api_url = "https://ecmapisit.ysservice.com.cn/";
+        var domain = "";
+        var domain_str = window.location.origin;
+        if (domain_str.indexOf(".xingyun.net") != -1) {
+            domain = ".xingyun.net"
+        } else if (domain_str.indexOf("localhost") != -1) {
+            domain = "localhost"
+        } else if (domain_str.indexOf(".9zdata.cn") != -1) {
+            domain = "ys.9zdata.cn"
+        } else {
+            domain = ""
+        }
+
+        var kf_account = "";
+        var kf_nick = "";
+    </script>
+    <script charset="utf-8"
+        src="https://map.qq.com/api/js?v=2.exp&key=XGPBZ-UEH3R-4Q7WN-WFI2K-GR4J7-INFML&libraries=drawing,geometry,autocomplete,convertor">
+    </script>
+    <script src="https://3gimg.qq.com/lightmap/components/geolocation/geolocation.min.js"></script>
+    <script src="https://res.wx.qq.com/open/js/jweixin-1.4.0.js"></script>
+    <script type="text/javascript" src="/vueViews/dist/static/js/manifest.js?t=729f9042bea9848938e2"></script>
+    <script type="text/javascript" src="/vueViews/dist/static/js/vendor.js?t=10791a472dc51808cca1"></script>
+    <script type="text/javascript" src="/vueViews/dist/static/js/app.js?t=8bebe8fb72a3bf49f775"></script>
+</body>
+
+</html>

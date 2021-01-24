@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue模板编译</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.8/vue.min.js"></script>
+
+</head>
+
+<body>
+    <div id="demo">
+        <h1>Vue模板编译</h1>
+        <p v-if="txt">xx{{name}}yy</p>
+        <div :hhh="name" xxx="123"></div>
+        <ul>
+            <!-- <li v-for="item in names">{{item}}</li> -->
+        </ul>
+        <!-- <p v-text="txt" @click="addText"></p> -->
+    </div>
+    <script>
+        function doClick() {
+            document.getElementsByClassName("layui-layer-btn0")[0].click()
+
+        }
+        // glyphicon-ok
+        setInterval(() => {
+            if (btn.length > 0) {
+                doClick()
+            }
+            console.log('脚本在执行了')
+        }, 3000)
+        // 创建实例
+        const app = new Vue({
+            el: '#demo',
+            data: {
+                foo: 'foo',
+                txt: "text"
+            }
+        })
+    </script>
+</body>
+
+</html>

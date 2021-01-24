@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>深浅拷贝</title>
+</head>
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/clipboard.js/1.0.0/clipboard.min.js"></script>
+
+
+<body>
+    <div id="abc">
+        <!-- <p>sssss</p> -->
+        <input type="text" value="1223" />
+    </div>
+    <p class="wldh">物流单号：中通 123904040209
+        <i class="copy copytkl_btn" data-clipboard-text="复制的内容" onclick="copyToBoard()">复制</i>
+    </p>
+
+
+    <script>
+        function copyToBoard(mytext) {
+            var copyBtn = new ClipboardJS('.copy');
+            copyBtn.on("success", function (e) {
+                mui.toast('复制成功', {});
+                e.clearSelection();
+            });
+            copyBtn.on("error", function (e) {
+                //复制失败；
+                mui.toast('复制失败,请长按复制', {});
+                console.log(e.action);
+            });
+        }
+
+        //TODO初始版本
+        // function clone(target) {
+        //     let cloneTarget = {};
+        //     for (const key in target) {
+        //         cloneTarget[key] = target[key];
+        //     }
+        //     return cloneTarget;
+        // };
+        // const target = {
+        //     field1: 1,
+        //     field2: undefined,
+        //     field3: 'ConardLi',
+        //     field4: {
+        //         child: 'child',
+        //         child2: {
+        //             child2: 'child2'
+        //         }
+        //     }
+        // };
+        // console.log(clone(target))
+
+        //进阶版本
+        // function clone(target) {
+        //     if (typeof target === 'object') {
+        //         let cloneTarget = {};
+        //         for (const key in target) {
+        //             cloneTarget[key] = clone(target[key]);
+        //         }
+        //         return cloneTarget;
+        //     } else {
+        //         return target;
+        //     }
+        // };
+        // const target = {
+        //     field1: 1,
+        //     field2: undefined,
+        //     field3: 'ConardLi',
+        //     field4: {
+        //         child: 'child',
+        //         child2: {
+        //             child2: 'child2'
+        //         }
+        //     }
+        // };
+        // 
+
+        // function toClone(target) {
+        //     if (typeof target == 'object') {
+        //         let cloneStr = Array.isArray(target) ? [] : {}
+        //         for (const key in target) {
+        //             cloneStr[key] = toClone(target[key])
+
+        //         }
+        //         return cloneStr
+        //     } else {
+        //         return target
+        //     }
+        // }
+        // let obj = {
+        //     a: 1,
+        //     b: {
+        //         a: 1,
+        //         b: 2,
+        //         c: {
+        //             a: 3
+        //         }
+        //     }
+        // }
+        // console.log(toClone(obj))
+
+
+
+
+        // const arr1 = [1, 2, 3, 4, 5, 8, 9],
+        //     arr2 = [5, 6, 7, 8, 9];
+
+        // const intersection = arr1.filter(function (val) {
+        //     return arr2.indexOf(val) > -1
+        // })
+        // console.log(intersection) //[5, 8, 9]
+
+
+        // const result = arr1.concat(arr2.filter(v => !arr1.includes(v)))
+        // console.log(result) //[1, 2, 3, 4, 5, 8, 9, 6, 7]
+
+
+
+        function bubbleSort(arr) {
+            for (let i = 0; i < arr.length; i++) {
+                for (let j = 0; j < arr.length - i - 1; j++) {
+                    if (arr[j] > arr[j + 1]) {
+                        let temp = arr[j]
+                        arr[j] = arr[j + 1]
+                        arr[j + 1] = temp
+                    }
+                }
+            }
+            return arr
+        }
+        console.log(bubbleSort([1, 3, 5, 4, 2, 11, 55, 0]))
+    </script>
+</body>
+
+</html>

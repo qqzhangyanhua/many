@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>神马</title>
+    <link rel="stylesheet" type="text/css" href="http://www.zyh.show/css/reset.css">
+</head>
+<style>
+    img {
+        width: 100%;
+        height: 100%;
+        display: inline;
+    }
+</style>
+
+<body>
+    <img src="./image/44b5b6ad9161eba2633c423c7b3b543.png">
+</body>
+<script>
+    function convertImgToBase64(url, callback, outputFormat) {
+        var canvas = document.createElement("canvas"),
+            ctx = canvas.getContext("2d"),
+            img = new Image();
+        img.crossOrigin = "Anonymous"; //它开启了本地的跨域允许。当然服务器存储那边也要开放相应的权限才行，如果是设置了防盗链的图片在服务端就没有相应的权限的话你本地端开启了权限也是没有用的
+        img.onload = function () {
+            canvas.height = img.height;
+            canvas.width = img.width;
+            ctx.drawImage(img, 0, 0);
+            var dataURL = canvas.toDataURL(outputFormat || "image/png"); //没权限的跨域图片在使用canvas.toDataURL()数据导出时会报错
+            callback.call(this, dataURL);
+            canvas = null;
+        };
+        img.src = url;
+    }
+
+    convertImgToBase64('https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=2581919349,4180465790&fm=26&gp=0.jpg',
+        function (base) {
+            console.log('2222222222222222', base)
+        })
+
+    function getBase64Image(img) {
+        var canvas = document.createElement('canvas');
+        canvas.width = img.width;
+        canvas.height = img.height;
+        var ctx = canvas.getContext('2d'); //获取绘图上下文环境
+        ctx.drawImage(img, 0, 0, img.width, img.height); //在canvas中画图
+        var dataURL = canvas.toDataURL('image/png'); //可选其他值 image/jpeg
+        return dataURL;
+    }
+
+    function main(src) {
+        var base64
+        var image = new Image();
+        image.src = src + '?v=' + Math.random(); // 处理缓存
+        image.crossOrigin = "*"; // 支持跨域图片
+        image.onload = function () {
+            base64 = getBase64Image(image);
+            return base64
+        }
+        return base64
+    }
+    console.log(main('https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=2581919349,4180465790&fm=26&gp=0.jpg'))
+</script>
+
+</html>

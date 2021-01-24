@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <input id="upload" type="file" accept="image/*" class="abc">
+
+    <input type="file" class="input" accept="image/jpg, image/jpeg" capture="camera">
+
+    <input type="file" accept="image/*" capture />
+
+
+    33333333333333333333333333
+    <!--图片二-->
+    <input type="file" accept="image/*" capture="camera">
+    <!--调取相机-->
+    <input type="file" id="xFile2" capture="camera" multiple="multiple" accept="image/*" class="imgInp1">
+
+
+
+
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.js"></script>
+</body>
+<script>
+    $("#upload").on("change", function () {
+        var file = $("#upload")[0].files[0];
+        console.log(file)
+        //获取图片大小,以M为单位
+        var fileSize = Math.round(file.size / 1024 / 1024);
+        //获取图片大小,以KB为单位
+        var fileSizeKB = Math.round(file.size / 1024);
+        var windowURL = window.URL || window.webkitURL;
+        fileSize = fileSize.toFixed(0); //保留小数点后一位      
+        $("#upload").val('');
+        if (!file) {
+            popShow("温馨提示", '请选择需要上传的文件');
+            return;
+        }
+
+        if (fileSize >= 15) {
+            popShow("温馨提示", '请上传不超过15M的文件');
+            return;
+        }
+
+        var formData = new FormData();
+
+        formData.append("file", file);
+        console.log('文件类型->' + file.type, 'formData为->' + formData);
+        // detection.formData = formData;
+    });
+
+    var t = '2020-08-06 19:34:14'
+    console.log(t.split(' '))
+</script>
+
+</html>

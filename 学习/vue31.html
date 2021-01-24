@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <script type="module">
+    import {
+        defineComponent,
+        reactive,
+        html,
+        onMounted
+      } from 'https://unpkg.com/@vue/lit@0.0.2';
+  
+      defineComponent('my-component', () => {
+        const state = reactive({
+          text: 'Hello World',
+        });
+        
+        function onClick() {
+          alert('cliked!');
+        }
+  
+        onMounted(() => {
+          console.log('mounted');
+        });
+  
+        return () => html`
+          <p>
+            <button @click=${onClick}>Click me</button>
+            ${state.text}
+          </p>
+        `;
+      })
+    </script>
+</head>
+
+<body>
+  <my-component />
+</body>
+<script>
+  var check = document.getElementsByClassName('checkbox-inline') //popup_operate  whaty-button
+  //$('.popup_operate .whaty-button').html() 如果他的值等于“重做” $('.popup_operate .whaty-button').click()
+  //document.getElementsByClassName('checkbox-inline')[1].click() 分别对应0 1，2，3 click()
+  //如果他的值等于$('.popup_operate .whaty-button').html()‘重做继续点击  错误也要点击要点2次’
+
+  var pop = document.getElementsByClassName("popup_do_question")
+  if (pop.length > 0) {
+    var check = document.getElementsByClassName('checkbox-inline')
+    var btnText = $('.popup_operate .whaty-button').html()
+    var flag1 = 0
+    if (btnText == '提交') {
+      console.log('提交了111')
+      check[0].click()
+      flag1++
+      $('.popup_operate .whaty-button').click()
+    } else if (btnText == '重做') {
+      $('.popup_operate .whaty-button').click()
+      check[flag1].click()
+      flag1++
+      $('.popup_operate .whaty-button').click()
+
+    } else {
+      //回答正确等于继续的时候
+      $('.popup_operate .whaty-button').click()
+    }
+
+  }
+  check[0].click()
+
+  $('.course_chapter_list .active').html()
+  $('.course_chapter_list .active').next().html().section_title
+
+  $('.course_chapter_list .active').next().children(".section_title").click()
+
+  setTimeout(function () {
+    var vidio = document.getElementsByTagName('video')
+    if (vidio.length > 0) {
+      vidio[0].volume = 0
+    }
+  }, 2000)
+</script>
+
+</html>

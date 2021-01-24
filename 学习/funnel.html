@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>漏洞</title>
+    <style>
+        .box {
+            height: 300px;
+            width: 450px;
+            border: 1px solid #333;
+            margin-top: 50px;
+            margin-left: 100px;
+        }
+    </style>
+</head>
+<script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.11/vue.min.js"></script>
+
+<body>
+    <div id="app">
+        <div class="box"></div>
+    </div>
+</body>
+<script>
+    var vm = new Vue({
+        el: "#app",
+        data() {
+            return {
+                msg: '1'
+            }
+        }
+    })
+</script>
+
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://s1.zhuanstatic.com/common/js/vue-next-3.0.0-alpha.0.js"></script>
+    <!-- <script src="./vue.global.js"></script> -->
+</head>
+
+<body>
+    <div id="container"></div>
+</body>
+
+<script>
+    function usePosition() { // 实时获取鼠标位置
+        let state = Vue.reactive({
+            x: 0,
+            y: 0
+        });
+
+        function update(e) {
+            state.x = e.pageX
+            state.y = e.pageY
+        }
+        Vue.onMounted(() => {
+            window.addEventListener('mousemove', update)
+        })
+        Vue.onUnmounted(() => {
+            window.removeEventListener('mousemove', update)
+        })
+        return Vue.toRefs(state);
+    }
+    const App = {
+        setup() { // Composition API 使用的入口
+            const state = Vue.reactive({
+                name: 'youxuan'
+            }); // 定义响应数据
+            const {
+                x,
+                y
+            } = usePosition(); // 使用公共逻辑
+            Vue.onMounted(() => {
+                console.log('当组挂载完成')
+            });
+            Vue.onUpdated(() => {
+                console.log('数据发生更新')
+            });
+            Vue.onUnmounted(() => {
+                console.log('组件将要卸载')
+            })
+
+            function changeName() {
+                state.name = 'webyouxuan';
+            }
+            return { // 返回上下文,可以在模板中使用
+                state,
+                changeName,
+                x,
+                y
+            }
+        },
+        template: `<button @click="changeName">{{state.name}} 鼠标x: {{x}} 鼠标: {{y}}</button>`
+    }
+    Vue.createApp().mount(App, container);
+</script>
+
+</html>

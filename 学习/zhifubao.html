@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://gw.alipayobjects.com/as/g/h5-lib/alipayjsapi/3.1.1/alipayjsapi.min.js"></script>
+</head>
+<body>
+    <button  id="btn1" onclick="print()">html标签事件绑定</button>
+</body>
+
+<script>
+    ap.chooseImage()
+  .then(function(result){
+    return new Promise(function(resolve, reject) {
+      yourImageDom.onload = resolve;
+      yourImageDom.onerror = reject;
+      yourImageDom.src = result.apFilePaths[0];
+    })
+  })
+  .then(function(){
+    return ap.alert('图片加载成功');
+  })
+  .catch(function(){
+    ap.showToast('图片加载失败');
+  });
+  function print(){
+    　  ap.confirm('Hello Alipay!', function(result){
+  ap.showToast(result.confirm ? '确定' : '取消');
+});
+}
+
+
+</script>
+</html>

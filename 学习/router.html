@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>手写router</title>
+</head>
+
+<body>
+    <button type="button" onclick="history.go(-1)">返回</button>
+    <h2>push模式</h2>
+    <ul>
+        <li onclick="Router.push(baseUrl)">首页</li>
+        <li onclick="Router.push(baseUrl+'news')">新闻</li>
+        <li onclick="Router.push(baseUrl+'product')">产品</li>
+    </ul>
+    <h2>replace模式</h2>
+    <ul>
+        <li onclick="Router.replace(baseUrl)">首页</li>
+        <li onclick="Router.replace(baseUrl+'news')">新闻</li>
+        <li onclick="Router.replace(baseUrl+'product')">产品</li>
+    </ul>
+    <div id="app"></div>
+    <script>
+        // baseUrl 是根路径
+        var app = document.getElementById("app"),
+            baseUrl = "/router/";
+
+        function RouterClass(opts) {
+            this.routes = {};
+            this.curUrl = "";
+            this.mode = "";
+            if (opts) {
+                this.mode = opts.mode;
+                if (this.mode === 'history') {
+                    this.eventHistoryRouter();
+                } else {
+                    this.eventHashRouter();
+                }
+            } else {
+                this.eventHashRouter();
+            }
+        }
+
+        RouterClass.prototype.route = function (path, callback) {
+            this.routes[path] = callback || function () {}
+        }
+
+        // 监听hash模式路由
+        RouterClass.prototype.eventHashRouter = function () {
+            // 监听load事件，防止刷新页面数据丢失
+            window.addEventListener("load", this.hashRouter.bind(this));
+            window.addEventListener("hashchange", this.hashRouter.bind(this))
+        }
+
+        //hash模式
+        RouterClass.prototype.hashRouter = function () {
+            this.curUrl = window.location.hash.slice(1) || '/';
+            // console.log(this.curUrl);
+            this.routes[this.curUrl]();
+        }
+
+        // history模式
+        RouterClass.prototype.historyRouter = function () {
+            this.curUrl = window.location.pathname;
+            this.routes[this.curUrl]();
+        }
+
+        // 监听history模式
+        RouterClass.prototype.eventHistoryRouter = function () {
+            window.addEventListener("load", this.historyRouter.bind(this));
+            // 监听回退事件  打个比方：就是你点浏览器那个返回的箭头按钮时触发的事件
+            window.addEventListener("popstate", this.historyRouter.bind(this));
+        }
+
+        // push模式页面跳转
+        RouterClass.prototype.push = function (url) {
+            if (this.mode === 'history') {
+                window.history.pushState({}, null, url);
+                this.routes[url]();
+            } else {
+                url = "#" + url;
+                window.location.href = url;
+            }
+        }
+
+        //replace模式页面跳转
+        RouterClass.prototype.replace = function (url) {
+            if (this.mode === 'history') {
+                window.history.replaceState({}, null, url);
+                this.routes[url]();
+            } else {
+                url = "#" + url;
+                window.location.replace(url);
+            }
+        }
+
+        //初始化 使用
+        var Router = new RouterClass({
+            mode: "history" //hash:带#号,history:不带#号
+        });
+
+        // 构造一个函数，根据url 改变 #app 中的内容，对页面进行渲染
+        Router.route(baseUrl, function () {
+            app.innerHTML = "首页"
+        })
+        Router.route(baseUrl + 'news', function () {
+            app.innerHTML = "新闻页面"
+        })
+        Router.route(baseUrl + 'product', function () {
+            app.innerHTML = "产品页面"
+        })
+    </script>
+</body>
+
+</html>

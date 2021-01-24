@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    var strategies = {
+        "S": function (salary) {
+            return salary * 4;
+        },
+        "A": function (salary) {
+            return salary * 3;
+        },
+        "B": function (salary) {
+            return salary * 2;
+        }
+    };
+    console.log(strategies['A'](100))
+    var calculateBonus = function (level, salary) {
+        return strategies[level](salary);
+    };
+
+    // var singleNumber = function (nums) {
+    //     let numsObj = {};
+    //     for (let i = 0; i < nums.length; i++) {
+    //         if (numsObj[nums[i]]) delete numsObj[nums[i]];
+    //         else numsObj[nums[i]] = 1;
+    //     }
+    //     return Object.keys(numsObj)[0];
+    // };
+
+    /**
+     * @param {number[]} nums
+     * @return {number}
+     */
+    // function singleNumber(nums) {
+    //     let temp = 0;
+    //     for (let i = 0; i < nums.length; i++)
+    //         temp ^= nums[i];
+    //     return temp;
+    // };
+    let arr = [1, 2, 1, 1, 2, 2, 4]
+    console.log(arr.lastIndexOf(4))
+    console.log(arr.indexOf(4))
+    var singleNumber = function (nums) {
+        for (let i = 0; i < nums.length; i++) {
+            if (nums.lastIndexOf(nums[i]) === nums.indexOf(nums[i])) return nums[i];
+        }
+    };
+
+    var postorderTraversal = function (root) {
+        var r = [],
+            dfs = node => r.unshift(node.val) && node.right && dfs(node.right) || node.left && dfs(node.left)
+        return root ? dfs(root) || r : []
+    };
+</script>
+
+</html>

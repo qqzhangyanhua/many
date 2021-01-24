@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+
+<body>
+    <button id="btn">开始</button>
+    <canvas id="canvas" width="500" height="500">
+        您的浏览器不支持canvas
+    </canvas>
+    <script>
+        var btn = document.getElementById('btn'),
+            canvas = document.getElementById('canvas'),
+            ctx = canvas.getContext('2d'),
+            out_r = 200, //外圆半径
+            inner_r = 20,
+            text_r = 140,
+            center_x = canvas.width / 2,
+            center_y = canvas.height / 2,
+            ary = ['Sun', 'Alex', 'Scarlett', 'Shirley', 'Candy', 'Lily', "Dived", "Ni"],
+            start_r = 0,
+            average_r = Math.PI * 2 / ary.length; //每一个弧度快的弧度
+
+        function draw() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            for (let i = 0; i < ary.length; i++) {
+                //需要知道每个弧度块的起始弧度和结束弧度
+                let _start = start_r + average_r * i;
+                let _end = _start + average_r;
+                //画圆,api存储啥啥啥的
+                ctx.save();
+                ctx.beginPath();
+                if (i % 2 === 0) {
+                    ctx.fillStyle = 'pink';
+                } else {
+                    ctx.fillStyle = 'lightpink';
+                }
+                ctx.arc(center_x, center_y, out_r, _start, _end, false); //外圆
+                ctx.arc(center_x, center_y, inner_r, _end, _start, true);
+                ctx.fill();
+                ctx.restore();
+
+
+                ctx.save();
+                ctx.font = '16px bold Arial';
+                ctx.fillStyle = '#fff';
+                ctx.translate(
+                    center_x + Math.cos(_start + average_r / 2) * text_r,
+                    center_y + Math.sin(_start + average_r / 2) * text_r,
+                );
+                ctx.rotate(_start + average_r / 2 + Math.PI / 2);
+                ctx.fillText(ary[i], -ctx.measureText(ary[i]).width / 2, 0);
+                ctx.restore();
+
+                //画箭头
+                ctx.save();
+                ctx.beginPath();
+                ctx.moveTo(center_x, center_y);
+                ctx.lineTo(center_x - 4, center_y);
+                ctx.lineTo(center_x, center_y - 150);
+
+                ctx.lineTo(center_x + 4, center_y);
+                ctx.closePath();
+                ctx.fillStyle = 'black';
+                ctx.fill();
+                ctx.restore();
+            }
+        }
+        draw();
+
+        let duration = 3000,
+            runTime = 0, //旋转的时间
+            allTime, //总得旋转时间
+            change;
+        // t 当前的运行时间  b 开始时间; c 该变量 ; d 运动总时间
+        function easeOut(t, b, c, d) {
+            if ((t /= d / 2) < 1) return c / 2 * t * t + b;
+            return -c / 2 * ((--t) * (t - 2) - 1) + b;
+        };
+
+        function rotate() {
+            runTime += 10;
+            if (runTime >= allTime) {
+                console.log(getValue());
+                return;
+            }
+            let _change = (change - easeOut(runTime, 0, change, allTime)) / 180 * Math.PI;
+            start_r += _change;
+            draw();
+            window.requestAnimationFrame(rotate);
+        }
+
+        function getValue() {
+            let startA = start_r / Math.PI * 180,
+                averageA = average_r / Math.PI * 180,
+                temp = (startA + 90) % 360,
+                res = 360 - temp;
+            index = Math.floor(res / averageA);
+            return ary[index];
+        }
+        btn.onclick = function () {
+            runTime = 0;
+            allTime = Math.random() * 30 + duration;
+            change = Math.random() * 10 + 5;
+            rotate();
+        }
+    </script>
+</body>
+
+</html>

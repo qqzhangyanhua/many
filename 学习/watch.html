@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>watch</title>
+</head>
+<script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.11/vue.min.js"></script>
+
+<body>
+    <div id="app">
+        <div>
+            <span>搜索</span>
+            <input v-model="searchValue" />
+        </div>
+        <!--列表，代码省略-->
+    </div>
+
+</body>
+<script>
+    var vm = new Vue({
+        el: '#app',
+        data() {
+            // 数据创建
+            return {
+                searchValue: ''
+            }
+        },
+        watch: {
+            // 在值发生变化之后，重新加载数据
+            searchValue(newValue, oldValue) {
+                // 判断搜索
+                console.log('444', newValue)
+                if (newValue !== oldValue) {
+                    this.$_loadData()
+                }
+            }
+        },
+
+        created() {
+
+        },
+        methods: {
+
+            $_loadData() {
+                console.log('2222222222222')
+            }
+        }
+    })
+</script>
+
+</html>

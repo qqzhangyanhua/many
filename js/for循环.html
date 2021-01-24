@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>for循环</title>
+</head>
+
+<body>
+
+    <script>
+        // var arr = [
+        //     [1, 2, 4], 3, [6, 8, 4, [0, 5, [10, 14]]]
+        // ]
+
+        // function file1(arr) {
+        //     let mtp = []
+
+        //     function f1(arr) {
+        //         arr.forEach((item) => {
+        //             if (typeof item == 'object') {
+        //                 f1(item)
+        //             } else {
+        //                 mtp.push(item)
+        //             }
+        //         })
+        //     }
+        //     f1(arr)
+        //     return mtp
+        // }
+        // console.log(arr.flat(Infinity));
+
+
+        // function fn1() {
+        //     this.x = 100
+        //     this.y = 200
+        //     this.getX = function () {
+        //         console.log(this.x)
+        //     }
+        // }
+        // fn1.prototype = {
+        //     y: 400,
+        //     x: 300,
+        //     getX: function () {
+        //         console.log(this.x)
+        //     },
+        //     getNum: function () {
+        //         console.log(this.x + this.y)
+        //     }
+        // }
+        // f1 = new fn1()
+        // f2 = new fn1()
+        // console.log(f1.__proto__.getX === f2.__proto__.getX);  //true
+
+
+        function Fn() {
+            getName = function () {
+                console.log(22)
+            }
+            return this
+        }
+        Fn.getName = function () {
+            console.log(33);
+        }
+        Fn.prototype.getName = function () {
+            console.log(44);
+
+        }
+        var getName = function () {
+            console.log(55);
+
+        }
+
+        function getName() {
+            console.log(66);
+
+        }
+        // Fn.getName() //33
+        // getName() //55
+        // Fn().getName() //22
+        // getName() //22
+        var a = new Fn.getName()
+        var b = new Fn().getName()
+        var c = new new Fn().getName()
+        console.log(a, b, c);
+    </script>
+</body>
+
+</html>

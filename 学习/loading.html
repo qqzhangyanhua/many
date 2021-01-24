@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .body {
+        height: 2000px;
+        position: relative;
+    }
+
+    #btn {
+        position: fixed;
+        top: 0;
+    }
+</style>
+
+<body>
+    <div class="body">
+
+        <button id="btn">top</button>
+    </div>
+</body>
+<script>
+    function showTop() {
+        var scrollTop = document.body.scrollTop || document.documentElement.scrollTop;
+        console.log('滚动条位置：' + scrollTop);
+    }
+    window.onscroll = debounce(showTop, 1000)
+    /*
+     * fn [function] 需要防抖的函数
+     * delay [number] 毫秒，防抖期限值
+     */
+    function debounce(fn, delay) {
+        let timer = null //借助闭包
+        return function () {
+            if (timer) {
+                clearTimeout(timer) //进入该分支语句，说明当前正在一个计时过程中，并且又触发了相同事件。所以要取消当前的计时，重新开始计时
+                timer = setTimeout(fn, delay)
+            } else {
+                timer = setTimeout(fn, delay) // 进入该分支说明当前并没有在计时，那么就开始一个计时
+            }
+        }
+    }
+
+
+    function doubel(fn, delay = 500) {
+        let timer = null
+        return function () {
+            if (timer) clearTimeout(timer)
+            timer = setTimeout(fn, delay)
+        }
+    }
+
+    function a() {
+        console.log(this, 'a')
+    };
+
+    function b(b) {
+        console.log(b)
+    }
+    a.call(b, '我是B的参数')
+</script>
+
+</html>

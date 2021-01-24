@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+</head>
+<link rel="stylesheet" type="text/css" href="./css/promptBoxNew.css">
+
+<body>
+    <button id="myBtn" class="mys" name='dd'>点击这里</button>
+    <div class="mys">99</div>
+    <div class="mys" data-id='123456'>88</div>
+    <div class="mys" data-id='123456'>77</div>
+    <p id="demo">ddddd</p>
+    <h3>43242342342</h3>
+    <script src="https://cdn.bootcss.com/jquery/3.5.0/jquery.js"></script>
+    <script>
+        setTimeout(function () {
+
+        }, 500)
+        //javascript自定义函数封装类似jQuery选择器
+        function vvv(str, attr, value) {
+            if (str) {
+                var strVal = str.substr(1);
+                if (str.substr(0, 1) == '#') {
+                    //id选择器
+                    return document.getElementById(strVal);
+                } else if (str.substr(0, 1) == '.') {
+                    //class选择器
+                    return document.getElementsByClassName(strVal)
+                } else if (str.substr(0, 1) == '%') {
+                    //name选择器
+                    return document.getElementsByName(strVal);
+                } else if (attr.substr(0, 5) == 'data-') {
+                    //data-* 自定义属性选择器
+                    var aElements = document.getElementsByTagName(str);
+                    var aEle = [];
+                    for (var i = 0; i < aElements.length; i++) {
+                        if (aElements[i].getAttribute(attr) == value)
+                            aEle.push(aElements[i]);
+                    }
+                    return aEle;
+                } else {
+                    //标签名选择器
+                    return document.getElementsByTagName(str)
+                }
+            } else {
+                return str;
+            }
+        }
+        // console.log(getDom('body'));
+
+
+        // getDom('#demo').text('455555555555')
+        // var dataId = getDom('div', 'data-id', '123456');
+        // for (var i = 0; i < dataId.length; i++) {
+        //     dataId[i].onclick = function () {
+        //         displayDate()
+        //     }
+        // }
+
+        // function displayDate() {
+        //     getDom("#demo").innerHTML = Date();
+        // }
+    </script>
+    <!-- <script src="./js/promptBox.js"></script> -->
+    <script>
+        // var list = [96, 86, 69, 12, 97, 40, 48, 42, 14, 82, 53, 68, 29, 51]
+
+        // function fn(arr, n) {
+        //     if (n == arr.length - 1)
+        //         return arr[n]
+        //     var v = fn(arr, n + 1)
+        //     return arr[n] > v ? arr[n] : v
+        // }
+        // // console.log(fn(list, 0))
+        // console.log(fn(list, 5))
+
+        // function fn(n) {
+        //     if (n <= 0) {
+        //         return 0;
+        //     } else if (n == 1) {
+        //         return 1
+        //     } else {
+        //         return fn(n - 1) + fn(n - 2)
+        //     }
+        // }
+        // fn(9)
+
+        // let url =
+        //     'https://ecmmallsit.ysservice.com.cn/?code=wHR0bQX6VU8l3UMCCLB4ztO73R3AfoRbw1js5Bsqt3c&state=STATE#/addresstob'
+
+        // function getHashParam(name) {
+        //     let reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)')
+        //     let queryString = window.location.hash.split('?')[1] || ''
+        //     let result = queryString.match(reg)
+        //     return result ? decodeURIComponent(result[2]) : null
+        // }
+
+        // function getQueryString(name) {
+        //     var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+        //     var r = window.location.search.substr(1).match(reg);
+        //     if (r != null) return unescape(r[2]);
+        //     return null;
+        // }
+        // console.log(url.includes('?11'))
+
+        function add(...arguments) {
+            console.log('AAAAA', arguments, arguments.length);
+            var arg = [...arguments]
+            console.log(typeof arg, arg)
+            return arg[0] + arg[1];
+        }
+        console.log(add(1, 2, 3, 4))
+        // 这里打印的是4，而不是2
+
+        function func(a, ...rest) {
+            console.log(a)
+            console.log(rest)
+        }
+
+        func(1, 2, 3, 4)
+        const obj = {
+            1: 200,
+            2: 140,
+            5: 400
+        };
+
+        function translate(obj) {
+            return Array.from({
+                length: 12
+            }).map((_, index) => obj[index + 1] || null);
+        }
+        // 输出 [200, 140, null, null, 400, null, null, null, null, null, null, null]
+        console.log(translate(obj));
+
+
+        function getCount() {
+            let count = 0
+            for (let i = 1; i < 400; i++) {
+                count = count + `${i}`.split('1').length - 1
+            }
+            return count
+        }
+
+        // 输出 180
+        console.log(getCount())
+
+
+
+        function sum(...args) {
+
+            function currySum(...rest) {
+                args.push(...rest)
+                return currySum
+            }
+            console.log(args)
+            currySum.toString = function () {
+                return args.reduce((result, cur) => {
+                    return result + cur
+                })
+            }
+            // currySum.toNumber = function () {
+            //     return args.reduce((result, cur) => {
+            //         return result + cur
+            //     })
+            // }
+            // return currySum
+        }
+        sum(1, 2, 3, 4, 5)
+        sum(1)(2)(3)(4)(5)
+    </script>
+</body>
+
+</html>

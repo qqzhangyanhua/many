@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<script src="./mvvm.js"></script>
+
+<body>
+    <div id="app">
+        <input v-model="title">
+        <h3>{{title}}</h3>
+        <button v-on:click="clickBtn">按钮</button>
+    </div>
+</body>
+<script>
+    function add() {
+        let data = [].concat(Array.prototype.slice.call(arguments))
+        console.log('data===', data)
+
+        function tmp() { // 使用闭包
+            data = data.concat(Array.prototype.slice.call(arguments))
+            console.log('data222', data)
+            return tmp;
+        }
+        tmp.valueOf = function () {
+            return data.reduce(((source, item) => source + item), 0);
+        }
+        tmp.toString = function () {
+            return data.reduce(((source, item) => source + item), 0);
+        }
+        return tmp
+    }
+    console.log(add(1, 2, 4, 5))
+    console.log(add(1)(2)(7))
+    // add(1) // 1
+    // add(1, 4)(2); // 7
+    // add(1)(2, 5)(3) // 11
+    // add(1, 5, 6)(2, 5)(3)(4, 4) // 30
+    var vm = new MVVM({
+        el: '#app',
+        data: {
+            title: 'hello world'
+        },
+
+        methods: {
+            clickBtn: function (e) {
+                console.log('22222222')
+                this.title = 'hello world';
+            }
+        },
+    });
+</script>
+
+</html>

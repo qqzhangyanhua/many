@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta content="email=no" name="format-detection">
+    <title>更多保险</title>
+    <style>
+        .hide {
+            display: none;
+        }
+
+        .screenPhoto {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            background: red;
+        }
+    </style>
+    <script>
+        // 限制字体大小 rem值
+        function Rem() {
+            var docEl = document.documentElement,
+                oSize = docEl.clientWidth / 7.5;
+            if (oSize > 100) {
+                oSize = 100
+            }
+            docEl.style.fontSize = oSize + "px"
+        }
+        window.addEventListener("resize", Rem, false);
+        Rem();
+
+        //获取get请求后的参数
+        function getUrlParam(name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            return r == null ? "" : unescape(r[2]);
+        }
+
+        function onBridgeReady() {
+            WeixinJSBridge.call('hideOptionMenu');
+        }
+        if (typeof WeixinJSBridge == "undefined") {
+            if (document.addEventListener) {
+                document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);
+            } else if (document.attachEvent) {
+                document.attachEvent('WeixinJSBridgeReady', onBridgeReady);
+                document.attachEvent('onWeixinJSBridgeReady', onBridgeReady);
+            }
+        } else {
+            onBridgeReady();
+        }
+    </script>
+</head>
+
+<body class="index_list ">
+    <div class="app" id="app">
+
+        <div class="outter" :class="{'hide': hideMyshop}">
+            <transition>
+                <router-view name="default"></router-view>
+            </transition>
+        </div>
+        <transition name="custom-classes-transition" :enter-active-class="enterAnimate"
+            :leave-active-class="leaveAnimate" mode="out-in">
+            <keep-alive>
+                <router-view name="subPage" class="view"></router-view>
+            </keep-alive>
+        </transition>
+        <router-view name="poster" class="view"></router-view>
+    </div>
+    <!-- << 切换-->
+    <template id="myShopHtml">
+        <div class="container">
+            111111111111
+            <button @click='goother'>gogogo</button>
+        </div>
+    </template>
+    <!-- 切换 >> -->
+
+    <!-- 拍照 -->
+    <template id="photoHtml">
+        <div class="screenPhoto">2222222</div>
+    </template>
+
+    <!-- << 筛选 -->
+    <template id="screenPhoto">
+        <div class="screenPhoto">3333333</div>
+    </template>
+    <!--  筛选 >> -->
+
+    <!-- << 分享  -->
+    <template id="shareHtml">
+        <div>444444444</div>
+    </template>
+    <!--  分享 >> -->
+
+    <!-- << 通用二维码  -->
+    <template id="currencyQrCode">
+        <div>55</div>
+    </template>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+    <script src='./vueRouter.js'></script>
+</body>
+
+</html>

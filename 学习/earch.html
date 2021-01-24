@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            background: url("https://cams.cpic.com.cn/cams/bulletin_board/images/bg.png") no-repeat;
+            height: 100%;
+            width: 100%;
+            background-size: 100% 100%;
+        }
+
+        #main {
+            background: url("./image/bg1.png") no-repeat;
+            background-size: cover;
+            opacity: .7;
+        }
+
+        h3 {
+            position: absolute;
+            left: 70px;
+            top: 30px;
+            z-index: 999;
+            color: #ffffff;
+        }
+    </style>
+</head>
+<script src="https://cdn.bootcdn.net/ajax/libs/echarts/4.8.0/echarts-en.common.min.js"></script>
+
+<body>
+    <div id="main" style="width: 600px;height:400px;">
+        <div>dddd
+            ddddddddddddddddddddssssssssdddddddddddddddddddddddddddddddddddddddddddddddd
+
+            <dib>zhanggggggg</dib>
+        </div>
+    </div>
+    <h3>会员来源</h3>
+</body>
+<script>
+    //TODOddddddd
+    //TODO
+    //API从vvfdfdfddfffffff
+    //TODO
+    var myChart = echarts.init(document.getElementById('main'));
+    option = {
+        tooltip: {
+            trigger: 'item',
+            formatter: '{a} <br/>{b}: {c} ({d}%)'
+        },
+        legend: {
+            orient: 'vertical',
+            align: "left", //文字和ICON的位置
+            x: '350px',
+            y: '110px', //设置title的位置
+            itemWidth: 20,
+            itemHeight: 20, //设置icon item的宽高
+            textStyle: { //图例文字的样式
+                color: '#1F6CE6 ',
+                fontSize: 20,
+
+            },
+            data: ['直接访问', '邮件营销', '联盟广告', '视频广告', '搜索引擎']
+        },
+        icon: "circle", //设置右小角图标的属性'circle', 'rect', 'roundRect', 'triangle', 'diamond', 'pin', 'arrow', 'none'
+        color: ['#4CAF50 ', '#FF8F00', '#673AB7', "#9E9E9E", "#9C27B0", "#8BC34A", "#CDDC39", "#00BCD4", "#F9A825",
+            "#4CAF50"
+        ],
+        series: [{
+            name: '访问来源',
+            type: 'pie',
+            radius: ['50%', '70%'],
+            center: ['30%', '50%'], //改变图表的位置
+            avoidLabelOverlap: false,
+            label: {
+                show: false,
+                position: 'center'
+            },
+            emphasis: {
+                label: {
+                    show: true,
+                    fontSize: '30',
+                    fontWeight: 'bold',
+                }
+            },
+            labelLine: {
+                show: false
+            },
+            data: [{
+                    value: 335,
+                    name: '直接访问'
+                },
+                {
+                    value: 310,
+                    name: '邮件营销'
+                },
+                {
+                    value: 234,
+                    name: '联盟广告'
+                },
+                {
+                    value: 135,
+                    name: '视频广告'
+                },
+                {
+                    value: 1548,
+                    name: '搜索引擎'
+                }
+            ]
+        }]
+    };
+    // 使用刚指定的配置项和数据显示图表。
+    myChart.setOption(option);
+</script>
+
+</html>
